@@ -41,6 +41,7 @@ const AddUser = (props) => {
         }
 
         console.log(enteredUserName,enteredUserAge);
+        props.onAddUser(enteredUserName,enteredUserAge);
         // מאפס את המשתנים הללו
         setEnteredUserName('');
         setEnteredUserAge('');
@@ -49,7 +50,7 @@ const AddUser = (props) => {
     return (
         <Card className={classes.input}>
         <form onSubmit={addUserHandelr}>
-            
+
             <label htmlFor="username">Username</label>
             <input id="username"
              type="text"
