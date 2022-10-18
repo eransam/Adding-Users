@@ -12,8 +12,8 @@ const UserList = (props) => {
 
             {/* זוהי פונ' שעוברת על כל האובייקטים במערך - .map */}
             {props.users.map((user) => (
-                
-                <li>
+
+                <li key={user.id}>
                     {user.name} ({user.age} years old)
                 </li>
             ))}

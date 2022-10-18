@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
 import Button123 from "../UI/Button/Button";
+import ErrorModal from "../UI/ErrorModel";
 
 
 
@@ -11,6 +12,7 @@ const AddUser = (props) => {
     //יוצרים משתני סטייט אשר ערכם משתנה במהלך הפרוייקט
     const [enteredUserName,setEnteredUserName] = useState('');
     const [enteredUserAge,setEnteredUserAge] = useState('');
+    const [error,seterror] = useState();
 
     //ומכניסה אותו כערך value פונ אשר לוקחת את פרטי התגית שהפעילה אותה ומחלצת ממנה את ה
     //enteredUserName למשתנה 
@@ -32,11 +34,19 @@ const AddUser = (props) => {
         //מבטל רווחים מיותרים = .trim()
         if(enteredUserAge.trim().length === 0 || enteredUserName.trim().length === 0)
         {
+            seterror({
+                title: "invalid input",
+                message: "please enter a valid "
+            });
             return;
         }
 
         //וולידציות
         if (+enteredUserAge < 1) {
+            seterror({
+                title: "invalid age",
+                message: "please enter a valid  age (>0)"
+            });
             return;
         }
 
@@ -47,7 +57,17 @@ const AddUser = (props) => {
         setEnteredUserAge('');
     };
 
+    const errorHandler = () => {
+        seterror(null);
+    }
+
     return (
+        <div>
+        {/*לנל כדי לבטל ולצאת מהודעת השגיאה error פקודה זו הופכת את הערך של המשתנה = onConfirm={errorHandler} */}
+        {/*לא תופעל או ErrorModal יהיה נל אז הקומפוננטה error מכיוון שפה בשורה מתחת במידה והמשתנה  */}
+        {/*המערכת שלנו תצא מהודעת השגיאה errorHandler שבמידה ותופעל בלחיצה על הכפתור שמפעילאת הפונ */}
+        {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
+        
         <Card className={classes.input}>
         <form onSubmit={addUserHandelr}>
 
@@ -66,6 +86,7 @@ const AddUser = (props) => {
             <Button123 type="submit">Add User</Button123>
         </form>
         </Card>
+        </div>
     );
 }; 
 

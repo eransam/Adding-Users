@@ -7,7 +7,7 @@ function App() {
 
     const addUserHandelr = (uName,uAge) => {
         setUsersList((prevUserList) => {
-            return [...prevUserList, {name:uName, age: uAge}];
+            return [...prevUserList, {name:uName, age: uAge , id: Math.random().toString()}];
         });
     };
 
@@ -26,3 +26,7 @@ function App() {
 }
 
 export default App;
+
+
+
+
